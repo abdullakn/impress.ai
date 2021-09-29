@@ -24,14 +24,17 @@
               {% csrf_token %}
             <input type="text" name="username" placeholder="Username" id="username" onkeyup="checkUserName()"/>
             <p id="results"></p>
-            <input type="password" name="password" placeholder="Password"/>
-            <input type="password" name="cpassword" placeholder="Confirm Password"/>
+            <input type="password" id="password" name="password" placeholder="Password"/>
+            <input type="password" id="cpassword" name="cpassword" placeholder="Confirm Password"/>
             
             
             <button>Sign Up</button>
             <p class="message">Already registered? <a href="{% url 'login' %}">Sign In</a></p>
           </form>
           <br>
+          <div style="display:none;" id="username_error" class= "alert alert-danger">Username is Required</div>
+          <div style="display:none;" id="password_error" class= "alert alert-danger">Password  Must Have 5 Character</div>
+          <div style="display:none;" id="cpassword_error" class= "alert alert-danger">Confirm Password  Must Have 5 Character</div>
 
           {% if messages %}
           {% for message in messages %}
@@ -50,8 +53,9 @@
     
 
     <script>
-        const available=true
+        var available=true
         form=document.getElementById("regform")   
+       
         function checkUserName(){
             console.log("sssssss")
               
@@ -76,10 +80,35 @@
 
         
         form.addEventListener('submit',(e)=>{
-            console.log(available)
-            if(available==false){
+            username=document.getElementById('username').value
+            const password=document.getElementById('password').value
+            const cpassword=document.getElementById('cpassword').value
+            console.log(available,password)
+            if(available==false){   
                 e.preventDefault()
-            }     
+            }  
+            else if (username=='') {
+                document.getElementById("password_error").style.display='none'
+                document.getElementById("cpassword_error").style.display='none'
+                document.getElementById("username_error").style.display='block'
+                e.preventDefault()
+            }
+            else if (password.length < 5){
+                document.getElementById("username_error").style.display='none'
+                document.getElementById("cpassword_error").style.display='none'
+                document.getElementById("password_error").style.display='block'
+                e.preventDefault()
+            }  
+            else if (cpassword.length < 5){
+                document.getElementById("username_error").style.display='none'
+                document.getElementById("password_error").style.display='none'
+                document.getElementById("cpassword_error").style.display='block'
+                e.preventDefault()
+            }  
+
+           
+            
+            
         })
     </script>      
     

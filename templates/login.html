@@ -17,8 +17,8 @@
             <h2>Login</h2>
           <form class="register-form" method="POST">
               {% csrf_token %}
-            <input type="text" name="username" placeholder="name"/>
-            <input type="password" name="password" placeholder="password"/>
+            <input type="text" name="username" placeholder="Username"/>
+            <input type="password" name="password" placeholder="Password"/>
             
             <button>Login</button>
             <p class="message">Create Account? <a href="{% url 'signup' %}">Sign Up</a></p>
