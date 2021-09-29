@@ -45,9 +45,14 @@ def login(request):
             return redirect('login')    
     return render(request,'login.html')
 
-@login_required(login_url='/login')
+@login_required(login_url='/')
 def home(request):
-    return render(request,'home.html')
+    msg_count=MsgCount.objects.all()
+    print(msg_count)
+    context={
+        'user_count':msg_count
+    }
+    return render(request,'home.html',context)
 
 
 def post_event_on_telegram(request,msg):
@@ -78,14 +83,7 @@ def post_event_on_telegram(request,msg):
 
 
 
-def user_click_count(request):
-    print("hhhhh")
-    msg_count=MsgCount.objects.all()
-    print(msg_count)
-    context={
-        'user_count':msg_count
-    }
-    return render(request,'msg_count.html',context)
+
 
 
 
