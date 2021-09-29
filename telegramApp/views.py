@@ -1,11 +1,13 @@
+from django.conf.urls import url
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 import telegram
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login as auth_login
+from django.contrib.auth import authenticate,login as auth_login, logout
 from django.contrib import messages
 from .models import MsgCount
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -43,7 +45,7 @@ def login(request):
             return redirect('login')    
     return render(request,'login.html')
 
-
+@login_required(login_url='/login')
 def home(request):
     return render(request,'home.html')
 
@@ -95,4 +97,10 @@ def check_username(request):
             return HttpResponse(" not available")
         else:
             return HttpResponse("available")  
+
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('/')
 

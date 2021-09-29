@@ -15,9 +15,37 @@
  
 
 </head>
+<style>
+    #logout:hover {
+        letter-spacing: 0.8em;
+        background-color: #F08C99;
+      }
+      
+      #logout {
+        float: right;
+       
+        margin-right: 40px;
+        height: 4em;
+        width: 10%;
+        padding: 1.5em auto;    
+        background-color: #FEB1C0;
+        border: none;
+        border-radius: 3px;
+        text-transform: uppercase;
+        letter-spacing: 0.5em;
+        transition: all 0.2s cubic-bezier(.4,0,.2,1);
+       
+      }
+      #logout_a{
+          text-decoration: none;
+      }
+    
+</style>
 <body>
 
-    
+    <button id="logout"><a  id="logout_a" href="{% url 'logout' %}">Logout</a></button>
+
+
     
   <div class="container">
 	<div class="row ">     
