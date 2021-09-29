@@ -17,15 +17,26 @@
 </head>
 <body>
 
-    {{request.user}}
+    
     
   <div class="container">
-	<div class="row ">      
+	<div class="row ">     
+        <h1 class="text-center">Telegram Bot</h1> 
+        <p class="text-center">click the below buttons</p>
         <div class="well text-center">
             <a href="{% url 'post_message' 'stupid' %}"> <button type="button" class="btn btn-hot text-uppercase btn-sm">Stupid button</button></a>
             <a href="{% url 'post_message' 'fat' %}"> <button type="button" class="btn btn-sunny text-uppercase btn-sm">Fat button</button></a>
             <a href="{% url 'post_message' 'dump' %}"> <button type="button" class="btn btn-fresh text-uppercase btn-sm">Dump button</button></a>           
-        </div>       
+        </div>      
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == "success" %}
+            <div class= "alert alert-success">{{ message }}</div>
+        {% elif message.tags == "error" %}
+            <div class= "alert alert-danger">{{ message }}</div>
+        {% endif %}
+        {% endfor %}
+        {% endif %} 
   </div>
 </div>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

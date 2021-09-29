@@ -71,8 +71,19 @@ def post_event_on_telegram(request,msg):
             msgcount=MsgCount(user=request.user,stupid=1) 
         msgcount.save()    
 
-          
-    return HttpResponse("success")    
+    messages.success(request,msg+" Send Successfully...")       
+    return redirect('home') 
+
+
+
+def user_click_count(request):
+    print("hhhhh")
+    msg_count=MsgCount.objects.all()
+    print(msg_count)
+    context={
+        'user_count':msg_count
+    }
+    return render(request,'msg_count.html',context)
 
 
 
